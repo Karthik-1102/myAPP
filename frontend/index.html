@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ffe6f0, #ffffff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+h1 {
+  color: #ff4d6d;
+  font-size: 28px;
+}
+
+.heart {
+  display: inline-block;
+  transition: 0.2s;
+}
+
+/* ❤️ Pulse */
+.pulse {
+  animation: pulseAnim 0.8s infinite ease-in-out;
+}
+
+@keyframes pulseAnim {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.35); }
+  100% { transform: scale(1); }
+}
+
+/* 💔 Break */
+.break {
+  animation: breakAnim 0.6s infinite;
+}
+
+@keyframes breakAnim {
+  0%   { transform: rotate(0deg); }
+  25%  { transform: rotate(-15deg); }
+  50%  { transform: rotate(15deg); }
+  75%  { transform: rotate(-10deg); }
+  100% { transform: rotate(0deg); }
+}
+
+p {
+  color: #555;
+  line-height: 1.6;
+}
+
+button {
+  margin: 10px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+.no {
+  background: #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>Akila <span id="heart" class="heart">❤️</span></h1>
+
+  <p id="mainText">
+    The Wonderla Plan Got cancelled ra…<br><br>
+    But I still want that day — with you 🙂
+  </p>
+
+  <h3 id="question">Will you go out with me?</h3>
+
+  <button class="yes">Yes ❤️</button>
+  <button class="no">No 💔</button>
+
+</div>
+
+<script>
+const heart = document.getElementById("heart");
+const mainText = document.getElementById("mainText");
+const question = document.getElementById("question");
+
+const yesBtn = document.querySelector(".yes");
+const noBtn = document.querySelector(".no");
+
+// Reset
+function resetHeart() {
+  heart.classList.remove("pulse", "break");
+  heart.textContent = "❤️";
+}
+
+// Hover YES
+yesBtn.addEventListener("mouseenter", () => {
+  resetHeart();
+  heart.classList.add("pulse");
+});
+
+// Hover NO
+noBtn.addEventListener("mouseenter", () => {
+  resetHeart();
+  heart.textContent = "💔";
+  heart.classList.add("break");
+});
+
+// Leave
+yesBtn.addEventListener("mouseleave", resetHeart);
+noBtn.addEventListener("mouseleave", resetHeart);
+
+// Click handlers
+yesBtn.addEventListener("click", () => sendResponse("yes"));
+noBtn.addEventListener("click", () => sendResponse("no"));
+
+// Click logic
+async function sendResponse(answer) {
+  await fetch("https://quiz-repo-g6l3.onrender.com/response", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ answer })
+  });
+
+  // Remove buttons
+  yesBtn.remove();
+  noBtn.remove();
+
+  if (answer === "yes") {
+    heart.classList.remove("break");
+    heart.classList.add("pulse");
+    heart.textContent = "❤️";
+
+    mainText.innerHTML = "Epudraaaa 😌🔥";
+    question.innerHTML = "Thakkali";
+  } else {
+    heart.classList.remove("pulse");
+    heart.classList.add("break");
+    heart.textContent = "💔";
+
+    mainText.innerHTML = "Podiiii";
+    question.innerHTML = "Parottaa";
+  }
+}
+</script>
+
+</body>
+</html>
