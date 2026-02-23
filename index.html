@@ -42,7 +42,7 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #ffe6f0, #ffffff);
+  background: radial-gradient(circle at top, #ffd6e0, #ffedf2 40%, #ffffff 80%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,26 +51,28 @@ body {
 
 .card {
   background: white;
-  padding: 35px 25px;   /* reduced */
+  padding: 25px 20px;   /* tighter */
   border-radius: 22px;
   text-align: center;
   width: 95%;
   max-width: 650px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  box-shadow: 0 25px 80px rgba(255, 77, 109, 0.15);
 }
+
 h1 {
   color: #ff4d6d;
-  font-size: 48px;   /* BIG, clean */
+  font-size: 56px;   /* big presence */
 }
 
 p {
-  font-size: 22px;
-  line-height: 1.8;
+  font-size: 24px;
+  line-height: 1.7;
 }
 
 h3 {
-  font-size: 28px;
+  font-size: 30px;
 }
+
 
 .heart {
   display: inline-block;
@@ -108,13 +110,17 @@ p {
 
 
 button {
-  margin: 12px;
-  padding: 16px 32px;
+  margin: 10px;
+  padding: 14px 28px;
   border: none;
   border-radius: 14px;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s ease;
+}
+
+.yes:hover {
+  transform: scale(1.08);
 }
 
 .yes {
