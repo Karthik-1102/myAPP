@@ -6,13 +6,16 @@
 
 <style>
 
-  /* 📱 Mobile optimization */
-@media (max-width: 600px) {
+  @media (max-width: 600px) {
+  body {
+    align-items: flex-start; /* prevents vertical squish */
+    padding-top: 40px;
+  }
+
   .card {
-    width: 95%;
-    max-width: none;
-    padding: 60px 30px; /* bigger breathing space */
-    transform: scale(1.6); /* slightly bigger */
+    width: 92%;
+    max-width: 92%;
+    padding: 50px 25px;
   }
 
   h1 {
@@ -28,10 +31,12 @@
   }
 
   button {
-    padding: 16px 30px;
+    width: 100%; /* 🔥 THIS makes it feel bigger */
+    padding: 16px;
     font-size: 18px;
   }
 }
+
 
 
 body {
@@ -52,6 +57,7 @@ body {
   width: 90%;
   max-width: 400px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+  min-height: 60vh;
 }
 
 h1 {
